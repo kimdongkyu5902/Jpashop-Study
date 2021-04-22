@@ -10,10 +10,11 @@ spring:
       ddl-auto: create
     properties:
       hibernate:
-        default_batch_fetch_size: true
         show_sql: true
         format_sql: true
+        default_batch_fetch_size: 1000
     database-platform: org.hibernate.dialect.H2Dialect
+    open-in-view: false
 logging:
   level:
     org.hibernate.SQL: debug

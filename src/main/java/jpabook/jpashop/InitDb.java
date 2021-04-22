@@ -13,7 +13,7 @@ import javax.persistence.EntityManager;
 @RequiredArgsConstructor
 public class InitDb {
 
-    private InitService initService;
+    private final InitService initService;
 
     @PostConstruct
     public void init() {
