@@ -30,6 +30,7 @@ public class OrderApiController {
     private final OrderRepository orderRepository;
     private final OrderQueryRepository orderQueryRepository;
 
+    // Entitiy 응답
     @GetMapping("/api/v1/orders")
     public List<Order> ordersV1() {
         List<Order> all = orderRepository.findAll(new OrderSearch());
@@ -43,6 +44,7 @@ public class OrderApiController {
         return all;
     }
 
+    //Dto 응답
     @GetMapping("/api/v2/orders")
     public List<OrderDto> orderV2() {
         List<Order> orders = orderRepository.findAll(new OrderSearch());
@@ -50,6 +52,7 @@ public class OrderApiController {
         return orderDtos;
     }
 
+    //fetch join
     @GetMapping("/api/v3/orders")
     public List<OrderDto> orderV3() {
         List<Order> orders = orderRepository.findAllWithItems();
@@ -57,6 +60,7 @@ public class OrderApiController {
         return orderDtos;
     }
 
+    //페이징 한계돌파
     @GetMapping("/api/v3.1/orders")
     public List<OrderDto> orderV3_page(
             @RequestParam(value = "offset", defaultValue = "0") int offset,
@@ -65,16 +69,19 @@ public class OrderApiController {
         return orders.stream().map(o -> new OrderDto(o)).collect(toList());
     }
 
+    //Dto 직접조회
     @GetMapping("/api/v4/orders")
     public List<OrderQueryDto> ooderV4() {
         return orderQueryRepository.findOrderQueryDtos();
     }
 
+    //Dto 컬렉션 최적화
     @GetMapping("/api/v5/orders")
     public List<OrderQueryDto> ooderV5() {
         return orderQueryRepository.findAllByDto_optimizer();
     }
 
+    //플랫 데이터 최적화
     @GetMapping("/api/v6/orders")
     public List<OrderQueryDto> ooderV6() {
         List<OrderFlatDto> flats = orderQueryRepository.findAllByDto_flat();

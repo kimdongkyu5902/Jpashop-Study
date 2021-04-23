@@ -24,6 +24,7 @@ public class MemberApiController {
         return memberService.findMembers();
     }
 
+    //응답값 껍대기
     @GetMapping("/api/v2/members")
     public Result memberV2() {
         List<Member> members = memberService.findMembers();
